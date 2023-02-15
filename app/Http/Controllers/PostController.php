@@ -30,6 +30,7 @@ class PostController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
+        return redirect('blog/'.$newPost->id);
     }
 
     public function show(Post $post)
