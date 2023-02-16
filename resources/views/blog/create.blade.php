@@ -11,7 +11,7 @@
 
                     <hr>
 
-                    <form action="" method="POST">
+                    <form action="{{ route('store.post') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="control-group col-12">

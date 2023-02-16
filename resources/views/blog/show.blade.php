@@ -8,7 +8,7 @@
                 <h1 class="display-one">{{ ucfirst($post->title) }}</h1>
                 <p>{!! $post->content !!}</p>
 
-                <p class="text-black-50"> created at: {{ $post->created_at }}</p>
+                <p class="text-black-50"> created at: {{ date_format($post->created_at, 'd.m.Y') }}</p>
                 <p>the author: {{ $post->user_id }}</p>
                 <a href="/blog/{{ $post->id }}/edit" class="btn btn-outline-primary">Edit Post</a>
                 <br><br>

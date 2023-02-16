@@ -10,7 +10,12 @@ class PostController extends Controller
     public function index()
     {
         // show all blog posts
-        $posts = Post::all();
+        //$posts = Post::all();
+        $posts = Post::select('posts.*')
+            ->orderBy('posts.created_at', 'desc')
+            ->paginate(5);
+        $posts->withPath('/blog');
+
         return view('blog.index', [
             'posts' => $posts,
         ]);
@@ -28,9 +33,9 @@ class PostController extends Controller
         $newPost = Post::create([
             'user_id' => $request->user_id,
             'title' => $request->title,
-            'content' => $request->content,
+            'content' => $request->input('content'),
         ]);
-        return redirect('blog/'.$newPost->id);
+        return redirect('blog/' . $newPost->id);
     }
 
     public function show(Post $post)
@@ -56,7 +61,7 @@ class PostController extends Controller
         //save the edited post
         $post->update([
             'title' => $request->title,
-            'content' => $request->content,
+            'content' => $request->input('content'),
         ]);
         return redirect('/blog/' . $post->id);
     }
